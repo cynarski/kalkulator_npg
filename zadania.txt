@@ -3,11 +3,12 @@ Podział zadań:
 
 
 - Michał Cynarski:
-
+1. dodatkowa funkcja - działania na macierzach
+2. obsługa liczb zespolonych
 
 - Tymoteusz Domagała:
 
 
 - Kacper Cisek:
-
+nic
 
