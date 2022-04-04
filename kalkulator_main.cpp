@@ -11,6 +11,8 @@ int main() {
         Wynik_dzialania d1(1,1,1);
         d1.dodawanie();
     }
+    if(wybrane_dzialanie == '-'){
+       
 
     return EXIT_SUCCESS;
 }
