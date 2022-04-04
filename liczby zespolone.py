@@ -19,6 +19,7 @@ def modol_liczby(a,b):
     b = float(b)
     return math.sqrt(a*a + b*b)
 
+
 def argument(a,b):
     a = float(a)
     b = float(b)
@@ -33,5 +34,14 @@ def argument(a,b):
     elif(a ==0 and b < 0 ):
         print('-%s'%(math.pi/2))
     else:
-        print("Tego nie wie nikt. Pozostawiamy do samointrpreatcji")
+        print("TEGO NIE WIE NIKT. POZOSTAWIAMY DO SAMOINTERPRETACJI")
 
+
+
+def main():
+   dane = input('').split(' ')
+   a = float(dane[0])
+   b = float(dane[1])
+   print(ComplexNumber(a,b))
+   
+main()
