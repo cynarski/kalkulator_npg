@@ -9,3 +9,4 @@ Zaimplementujemy w nim poniższe funkcjonalności:
 4. Czyszczenie pamięci.
 5. Obsługa licz zespolonych.
 6. ...
+
