@@ -17,4 +17,4 @@ Projekt wykonali:
 -Kacper Cisek
 
 
-Oceniła na piątke dr Natalia
+Oceniła na piątke dr Nataliia
