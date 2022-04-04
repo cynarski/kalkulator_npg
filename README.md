@@ -10,3 +10,8 @@ Zaimplementujemy w nim poniższe funkcjonalności:
 5. Obsługa licz zespolonych.
 6. ...
 
+Projekt wykonali:
+Mateusz Cierpik
+Michał Cynarski
+Tymoteusz Domagała
+Kacper Cisek
