@@ -1,5 +1,19 @@
 import math
 
+def ComplexNumber(a,b):
+    a = float(a)
+    b = float(b)
+    if(a == 0 and b >= 0):
+        print('%si' %(b))
+    elif(a == 0 and b < 0):
+        print('%si' %(b))
+    elif(a > 0 and b < 0):
+        print('%s%si' %(a,b))
+    elif(a < 0 and b < 0):
+        print('%s%si' % (a, b))
+    else:
+        print('%s+%si' % (a, b))
+
 def modol_liczby(a,b):
     a = float(a)
     b = float(b)
