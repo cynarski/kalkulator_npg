@@ -1,5 +1,5 @@
 # kalkulator_npg
-Jest to projekt na przedmiot Narzedzia Pracy Grupowej, w trakcie którego napiszemy kalkulator w jezyku C++
+Jest to projekt na przedmiot Narzedzia Pracy Grupowej, w trakcie którego napiszemy kalkulator w jezyku Python.
 
 Zaimplementujemy w nim poniższe funkcjonalności:
 
@@ -17,4 +17,4 @@ Projekt wykonali:
 -Kacper Cisek
 
 
-Oceniła na piątke dr Nataliia
+Oceniła na piątke dr Nataliia :-)
