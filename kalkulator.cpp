@@ -21,3 +21,15 @@ void Wynik_dzialania::dodawanie() {
 
     std::cout << "= "<< wynik << std::endl;
 }
+
+void Wynik_dzialania::odejmowanie() {
+    std::cin >> pierwszy_skladnik;
+    std::cout << "-" << " ";
+    std::cin >> drugi_skladnik;
+
+    wynik = pierwszy_skladnik - drugi_skladnik;
+
+
+
+    std::cout << "= "<< wynik << std::endl;
+}
