@@ -11,7 +11,7 @@ Zaimplementujemy w nim poniższe funkcjonalności:
 6. ...
 
 Projekt wykonali:
-Mateusz Cierpik
-Michał Cynarski
-Tymoteusz Domagała
+Mateusz Cierpik,
+Michał Cynarski,
+Tymoteusz Domagała,
 Kacper Cisek
