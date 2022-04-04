@@ -15,3 +15,6 @@ Projekt wykonali:
 -Michał Cynarski,
 -Tymoteusz Domagała,
 -Kacper Cisek
+
+
+Oceniła na piątke dr Natalia
