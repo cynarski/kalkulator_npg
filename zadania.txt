@@ -1,14 +1,14 @@
 Podział zadań:
-- Mateusz Cierpik:
+Mateusz Cierpik:
 - dodawanie, odejmowanie
 
-- Michał Cynarski:
-1. dodatkowa funkcja - działania na macierzach
-2. obsługa liczb zespolonych
+Michał Cynarski:
+- dodatkowa funkcja - działania na macierzach
+- obsługa liczb zespolonych
 
-- Tymoteusz Domagała:
+Tymoteusz Domagała:
 -pamięć, czyszczenie pamięci
 
-- Kacper Cisek:
--dzielenie, mnożenie
+Kacper Cisek:
+- dzielenie, mnożenie
 
