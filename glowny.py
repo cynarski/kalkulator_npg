@@ -1,0 +1,58 @@
+import tkinter as tk
+
+symbole = ['7', '8', '9', '/', 'e', 'C', '4', '5', '6', '*', '(',')','1','2','3','-','^2','√','0',',','π','+']
+
+def tworzenieOkna():
+
+    okno = tk.Tk()
+    okno.configure(bg = 'light gray')
+    okno.geometry('480x400')
+    okno.title('Kalkulator')
+
+    return okno
+
+def tworzenieEkrany(okno):
+
+    ekran = [tk.Label(okno, bg= '#C0CBCB', width=68, anchor='w' , borderwidth= 2) for i in range(3)]
+
+    for i in range(len(ekran)):
+        ekran[i].grid(row= i , columnspan= 6, ipady= 15 , ipadx=1)
+
+    return ekran
+
+def tworzeniePolaNaDane(okno,ekran):
+
+    pole_na_dane = tk.Entry(okno, borderwidth= 0,highlightcolor='white')
+    pole_na_dane.grid(row=len(ekran) , columnspan=6, ipadx= 180, ipady=10)
+
+    info = tk.Label(okno, bg='white',  width=68, anchor='w', borderwidth=2)
+    info.grid(row= len(ekran) + 1 , columnspan= 6, ipady= 15 , ipadx=1)
+
+    return pole_na_dane
+
+def tworzeniePrzyciskow(okno,ekran):
+    przyciski = [tk.Button(okno, text=symbol,borderwidth=0,bg = 'light gray') for symbol in symbole]
+
+    j = len(ekran) + 2
+    for i in range(len(przyciski)):
+        if i % 6 == 0:
+            j += 1
+        margines = 60 if len(przyciski) == 1 else 30
+        przyciski[i].grid(row = j, column= i% 6, ipady= 5 , ipadx= margines)
+    znak_rownosci = tk.Button(okno, text= '=' , bg = '#00BFFF', borderwidth= 0)
+    znak_rownosci.grid(row = len(ekran) + 6, column= 4,columnspan= 2, ipady= 5 , ipadx= 60)
+    return przyciski
+
+def main():
+
+    okno = tworzenieOkna()
+
+    ekran = tworzenieEkrany(okno)
+
+    pole_na_dane = tworzeniePolaNaDane(okno,ekran)
+
+    przyciski = tworzeniePrzyciskow(okno,ekran)
+
+    okno.mainloop()
+
+main()
