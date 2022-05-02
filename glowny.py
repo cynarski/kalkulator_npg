@@ -1,7 +1,7 @@
 import tkinter as tk
 import math
 
-symbole = ['7', '8', '9', '/', '\u21BA', 'C', '4', '5', '6', '*', 'e','','1','2','3','-','^','','0',',','π','+','i']
+symbole = ['7', '8', '9', '/', '\u21BA', 'C', '4', '5', '6', '*', 'e','','1','2','3','-','^','','0','.','i','+','π']
 
 def tworzenieOkna():
 
@@ -184,7 +184,7 @@ def obliczPierwiastek(pole_na_dane,ekran):
         for i in range(1, len(ekran)):
             if ekran[i]['text']:
                 ekran[i - 1]['text'] = ekran[i]['text']
-        ekran[-1]['text'] = tekst + ' = ' + str(wynik)
+        ekran[-1]['text'] =  '√' + tekst + ' = ' + str(wynik)
 
         pole_na_dane.delete(0, 'end')
 
@@ -203,7 +203,7 @@ def obliczSilnie(pole_na_dane,ekran):
         for i in range(1, len(ekran)):
             if ekran[i]['text']:
                 ekran[i - 1]['text'] = ekran[i]['text']
-        ekran[-1]['text'] = tekst + ' = ' + str(wynik)
+        ekran[-1]['text'] = tekst + '!' + ' = ' + str(wynik)
 
         pole_na_dane.delete(0, 'end')
 
@@ -227,6 +227,22 @@ def obliczSinusa(pole_na_dane,ekran):
 
     return f
 
+def obliczArccos(pole_na_dane,ekran):
+    def f():
+        tekst = pole_na_dane.get()
+        a = float(pole_na_dane.get()[0:])
+
+        wynik = math.acos(a)
+
+        for i in range(1, len(ekran)):
+            if ekran[i]['text']:
+                ekran[i - 1]['text'] = ekran[i]['text']
+        ekran[-1]['text'] = tekst + ' = ' + str(wynik)
+
+        pole_na_dane.delete(0, 'end')
+
+    return f
+
 def tworzeniePrzyciskow(okno, ekran,info):
     przyciski = [tk.Button(okno, text=symbol,borderwidth=0,bg = 'light gray') for symbol in symbole]
 
@@ -239,16 +255,16 @@ def tworzeniePrzyciskow(okno, ekran,info):
         przyciski[i].configure(command= przyciskKlik(pole_na_dane,przyciski[i]['text']))
 
     znak_rownosci = tk.Button(okno, text= '=' , bg = '#00BFFF', borderwidth= 0,command = oblicz(pole_na_dane,ekran,info) )
-    znak_rownosci.grid(row = len(ekran) + 7, column= 4,columnspan= 2, ipady= 5 , ipadx= 60)
+    znak_rownosci.grid(row = len(ekran) + 8, column= 4,columnspan= 2, ipady= 5 , ipadx= 60)
 
     wczytaj_poprzedni = tk.Button(okno, text='\u2B05', command=wczytajPoprzedni(pole_na_dane, ekran,okno))
-    wczytaj_poprzedni.grid(row=len(ekran), column=4, ipady=5, ipadx=20)
+    wczytaj_poprzedni.grid(row=len(ekran), column=5, ipady=5, ipadx=20)
 
     znak_argumentu = tk.Button(okno, text='arg(z)',borderwidth= 0,bg = 'light gray', command=obliczArgument(pole_na_dane, ekran))
-    znak_argumentu.grid(row=len(ekran) + 7, column=2, ipady=5, ipadx=20)
+    znak_argumentu.grid(row=len(ekran) + 8, column=2, ipady=5, ipadx=20)
 
     znak_modulu = tk.Button(okno, text='\u007C' + 'z' + '\u007C',borderwidth= 0,bg = 'light gray', command=obliczModul(pole_na_dane, ekran))
-    znak_modulu.grid(row=len(ekran) + 7, column=1, ipady=5, ipadx=20)
+    znak_modulu.grid(row=len(ekran) + 8, column=1, ipady=5, ipadx=20)
 
     znak_pierwiastka = tk.Button(okno, text = '√',borderwidth= 0,bg = 'light gray', command=obliczPierwiastek(pole_na_dane,ekran))
     znak_pierwiastka.grid(row = len(ekran) + 5 , column = 5,ipadx=20)
@@ -259,7 +275,18 @@ def tworzeniePrzyciskow(okno, ekran,info):
     znak_sinusa = tk.Button(okno, text= 'sin',borderwidth= 0,bg = 'light gray',command= obliczSinusa(pole_na_dane,ekran))
     znak_sinusa.grid(row=len(ekran) + 7, column=0, ipady=5, ipadx=20)
 
+    znak_cosinusa = tk.Button(okno, text='cos', borderwidth=0, bg='light gray',)
+    znak_cosinusa.grid(row=len(ekran) + 7, column=1, ipady=5, ipadx=20)
 
+
+    znak_tangensa = tk.Button(okno, text='tan', borderwidth=0, bg='light gray', )
+    znak_tangensa.grid(row=len(ekran) + 7, column=2, ipady=5, ipadx=20)
+
+    znak_arcsin = tk.Button(okno, text='arcsin', borderwidth=0, bg='light gray', )
+    znak_arcsin.grid(row=len(ekran) + 7, column=3, ipady=5, ipadx=20)
+
+    znak_arccos = tk.Button(okno, text='arccos', borderwidth=0, bg='light gray',command=obliczArccos(pole_na_dane,ekran) )
+    znak_arccos.grid(row=len(ekran) + 7, column=4, ipady=5, ipadx=20)
 
     return przyciski
 
@@ -275,5 +302,7 @@ if __name__ == '__main__':
     przyciski = tworzeniePrzyciskow(okno,ekran,info)
 
     okno.mainloop()
+
+
 
 
