@@ -93,6 +93,8 @@ def oblicz(pole_na_dane,ekran,info):
         else:
             ekran[-1]['text'] = tekst + '   =   ' + str(eval(tekst))
 
+        pole_na_dane.delete(0, 'end')
+    
     return f
 
 
@@ -161,6 +163,8 @@ def obliczModul(pole_na_dane, ekran):
 
 
         pole_na_dane.delete(0, 'end')
+        
+    return f
 
 def obliczPierwiastek(pole_na_dane,ekran):
     def f():
@@ -192,7 +196,7 @@ def obliczSilnie(pole_na_dane,ekran):
         for i in range(1, len(ekran)):
             if ekran[i]['text']:
                 ekran[i - 1]['text'] = ekran[i]['text']
-        ekran[-1]['text'] = tekst + ' = ' + str(wynik)
+        ekran[-1]['text'] = tekst + '!' +' = ' + str(wynik)
 
         pole_na_dane.delete(0, 'end')
 
