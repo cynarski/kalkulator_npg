@@ -1,14 +1,16 @@
 Podział zadań:
 Mateusz Cierpik:
-- dodawanie, odejmowanie
+- liczby zespolone
 
 Michał Cynarski:
-- dodatkowa funkcja - działania na macierzach
-- obsługa liczb zespolonych
+- dodatkowe funkcje - funkcje trygonometryczne, logarytmy 
+- design
 
 Tymoteusz Domagała:
 -pamięć, czyszczenie pamięci
+- funkcje do przycisków
 
 Kacper Cisek:
-- dzielenie, mnożenie
+- operacje arytmetyczne
+- funkcje do przycisków
 
