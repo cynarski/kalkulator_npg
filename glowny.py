@@ -1,7 +1,7 @@
 import tkinter as tk
 import math
 
-symbole = ['7', '8', '9', '/', '\u21BA', 'C', '4', '5', '6', '*', '(',')','1','2','3','-','^2','√','0',',','π','+']
+symbole = ['7', '8', '9', '/', '\u21BA', 'C', '4', '5', '6', '*', '(',')','1','2','3','-','^2','','0',',','π','+','i']
 
 def tworzenieOkna():
 
@@ -45,24 +45,6 @@ def przyciskKlik(pole_na_dane,symbol):
     return f
 
 
-
-def tworzeniePrzyciskow(okno, ekran,info):
-    przyciski = [tk.Button(okno, text=symbol,borderwidth=0,bg = 'light gray') for symbol in symbole]
-
-    j = len(ekran) + 2
-    for i in range(len(przyciski)):
-        if i % 6 == 0:
-            j += 1
-        margines = 60 if len(przyciski) == 1 else 30
-        przyciski[i].grid(row = j, column= i% 6, ipady= 5 , ipadx= margines)
-        przyciski[i].configure(command= przyciskKlik(pole_na_dane,przyciski[i]['text']))
-
-    znak_rownosci = tk.Button(okno, text= '=' , bg = '#00BFFF', borderwidth= 0,command = oblicz(pole_na_dane,ekran,info) )
-
-    znak_rownosci.grid(row = len(ekran) + 6, column= 4,columnspan= 2, ipady= 5 , ipadx= 60)
-
-    return przyciski
-
 def oblicz(pole_na_dane,ekran,info):
 
     def ostatniZnak(tekst):
@@ -85,10 +67,13 @@ def oblicz(pole_na_dane,ekran,info):
 
         return tekst
 
-    def pierwiastek(tekst):
+    def liczbaPi(tekst):
+
         for i in range(len(tekst)):
-            if  tekst[i] == '√':
-                return math.sqrt()
+            if tekst[i] == 'π':
+                tekst = tekst[:i] + 'math.pi' + tekst[i + 1 :]
+
+        return tekst
 
     def f():
         tekst=pole_na_dane.get()
@@ -102,13 +87,150 @@ def oblicz(pole_na_dane,ekran,info):
         if '^' in tekst:
             wyrazenie = potenga(tekst)
             ekran[-1]['text'] = tekst + '   =   ' + str(eval(wyrazenie))
-        elif '√' in tekst:
-            wyrazenie = pierwiastek(tekst)
-            
+        elif 'π' in tekst:
+            wyrazenie = liczbaPi(tekst)
+            ekran[-1]['text'] = tekst + '   =   ' + str(eval(wyrazenie))
         else:
             ekran[-1]['text'] = tekst + '   =   ' + str(eval(tekst))
 
     return f
+
+
+def obliczArgument(pole_na_dane, ekran):
+    def f():
+
+        tekst = pole_na_dane.get()
+        a = float(pole_na_dane.get()[-4])
+        b = float(pole_na_dane.get()[-2])
+
+        if pole_na_dane.get()[-3] == '-':
+            b = -b
+        if pole_na_dane.get()[0] == '-':
+            a = -a
+
+        if a > 0:
+            wynik = math.atan(a / b)
+        elif (a < 0 and b >= 0):
+            wynik = math.atan(a / b) + math.pi
+        elif (a < 0 and b < 0):
+            wynik = math.atan(a / b) - math.pi
+        elif (a == 0 and b > 0):
+            wynik = math.pi / 2
+        elif (a == 0 and b < 0):
+            wynik = - (math.pi / 2)
+        else:
+            print("TEGO NIE WIE NIKT. POZOSTAWIAMY DO SAMOINTERPRETACJI")
+
+        for i in range(1, len(ekran)):
+            if ekran[i]['text']:
+                ekran[i - 1]['text'] = ekran[i]['text']
+        ekran[-1]['text'] = 'arg(' + tekst + ')' + ' = ' + str(wynik)
+
+        pole_na_dane.delete(0, 'end')
+
+    return f
+
+def wczytajPoprzedni(pole_na_dane, ekran, okno):
+    def f():
+
+        pole_na_dane.delete(0, 'end')
+        poprzedni = ekran[-1]['text']
+        i=0
+        for el in poprzedni:
+            if el != '=':
+                pole_na_dane.insert(i, el)
+                i+=1
+            else:
+                break
+
+    return f
+
+def obliczModul(pole_na_dane, ekran):
+    def f():
+
+        tekst = pole_na_dane.get()
+        a = float(pole_na_dane.get()[-4])
+        b = float(pole_na_dane.get()[-2])
+
+        wynik = math.sqrt(a*a + b*b)
+
+        for i in range(1, len(ekran)):
+            if ekran[i]['text']:
+                ekran[i-1]['text'] = ekran[i]['text']
+        ekran[-1]['text'] = '\u007C'+tekst + '\u007C' + ' = ' + str(wynik)
+
+
+        pole_na_dane.delete(0, 'end')
+
+def obliczPierwiastek(pole_na_dane,ekran):
+    def f():
+
+        tekst = pole_na_dane.get()
+        a = float(pole_na_dane.get()[0:])
+
+        wynik = math.sqrt(a)
+
+        for i in range(1, len(ekran)):
+            if ekran[i]['text']:
+                ekran[i - 1]['text'] = ekran[i]['text']
+        ekran[-1]['text'] = tekst + ' = ' + str(wynik)
+
+        pole_na_dane.delete(0, 'end')
+
+    return f
+
+def obliczSilnie(pole_na_dane,ekran):
+    def f():
+        tekst = pole_na_dane.get()
+        a = int(pole_na_dane.get()[0:])
+        b = 1
+        silnia = 1
+        while (b < a + 1):
+            silnia *= b
+            b += 1
+        wynik = silnia
+        for i in range(1, len(ekran)):
+            if ekran[i]['text']:
+                ekran[i - 1]['text'] = ekran[i]['text']
+        ekran[-1]['text'] = tekst + ' = ' + str(wynik)
+
+        pole_na_dane.delete(0, 'end')
+
+
+
+    return f
+
+def tworzeniePrzyciskow(okno, ekran,info):
+    przyciski = [tk.Button(okno, text=symbol,borderwidth=0,bg = 'light gray') for symbol in symbole]
+
+    j = len(ekran) + 2
+    for i in range(len(przyciski)):
+        if i % 6 == 0:
+            j += 1
+        margines = 60 if len(przyciski) == 1 else 30
+        przyciski[i].grid(row = j, column= i% 6, ipady= 5 , ipadx= margines)
+        przyciski[i].configure(command= przyciskKlik(pole_na_dane,przyciski[i]['text']))
+
+    znak_rownosci = tk.Button(okno, text= '=' , bg = '#00BFFF', borderwidth= 0,command = oblicz(pole_na_dane,ekran,info) )
+    znak_rownosci.grid(row = len(ekran) + 7, column= 4,columnspan= 2, ipady= 5 , ipadx= 60)
+
+    wczytaj_poprzedni = tk.Button(okno, text='\u2B05', command=wczytajPoprzedni(pole_na_dane, ekran,okno))
+    wczytaj_poprzedni.grid(row=len(ekran), column=4, ipady=5, ipadx=20)
+
+    znak_argumentu = tk.Button(okno, text='arg(z)', command=obliczArgument(pole_na_dane, ekran))
+    znak_argumentu.grid(row=len(ekran) + 7, column=2, ipady=5, ipadx=20)
+
+    znak_modulu = tk.Button(okno, text='\u007C' + 'z' + '\u007C', command=obliczModul(pole_na_dane, ekran))
+    znak_modulu.grid(row=len(ekran) + 7, column=1, ipady=5, ipadx=20)
+
+    znak_pierwiastka = tk.Button(okno, text = '√',borderwidth= 0,bg = 'light gray', command=obliczPierwiastek(pole_na_dane,ekran))
+    znak_pierwiastka.grid(row = len(ekran) + 5 , column = 5,ipadx=20)
+
+    znak_silnii = tk.Button(okno, text = '!',borderwidth= 0,bg = 'light gray', command=obliczSilnie(pole_na_dane,ekran))
+    znak_silnii.grid(row=len(ekran) + 4, column=5, ipadx=20)
+
+
+    return przyciski
 
 if __name__ == '__main__':
 
@@ -122,6 +244,7 @@ if __name__ == '__main__':
     przyciski = tworzeniePrzyciskow(okno,ekran,info)
 
     okno.mainloop()
+
 
 
 
