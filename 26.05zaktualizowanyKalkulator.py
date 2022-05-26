@@ -56,7 +56,7 @@ def oblicz(pole_na_dane, ekran, info):
 
         while tekst[-i] == ')':
             i += 1
-        if tekst[-i] == "e" or tekst[-i] == "π":
+        if tekst[-i] == "e" or tekst[-i] == "π" or tekst[-i] == "j":
             return True
         return tekst[-i].isdigit()
 
