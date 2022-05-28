@@ -1,5 +1,6 @@
 import tkinter as tk
 import math
+from tkinter.constants import GROOVE
 
 symbole = ['7', '8', '9', '/', '\u21BA', 'C', '4', '5', '6', '*', 'e', '', '1', '2', '3', '-', '^', '', '0', '.', 'j',
            '+', 'π']
@@ -70,7 +71,7 @@ def oblicz(pole_na_dane, ekran, info):
 
         for i in range(len(tekst)):
             if tekst[i] == '^':
-                tekst = tekst[:i] + '**' + tekst[i + 1:]
+                tekst = tekst[:i] + str('**') + tekst[(i + 1):]
 
         return tekst
 
@@ -86,7 +87,7 @@ def oblicz(pole_na_dane, ekran, info):
 
         for i in range(len(tekst)):
             if tekst[i] == 'e':
-                tekst = tekst[:i] + 'math.e' + tekst[i + 1:]
+                tekst = tekst[:i] + str(math.e) + tekst[(i + 1):]
 
         return tekst
     def f():
@@ -419,6 +420,37 @@ def obliczArcsin(pole_na_dane, ekran):
 
     return f
 
+def obliczLn(pole_na_dane, ekran):
+    def f():
+        tekst_pierwotny = pole_na_dane.get()
+
+        tekst = pole_na_dane.get()
+
+        for i in range(len(tekst)):
+            if tekst[i] == 'e':
+                tekst = tekst[:i] + str(math.e) + tekst[(i + 1):]
+
+        argument = eval(tekst)
+
+        wynik = math.log(argument)
+
+        for i in range(1, len(ekran)):
+            if ekran[i]['text']:
+                ekran[i - 1]['text'] = ekran[i]['text']
+        ekran[-1]['text'] = 'ln(' + tekst_pierwotny + ')' + ' = ' + str(wynik)
+
+        pole_na_dane.delete(0, 'end')
+
+        # Pamiec ------------
+        if (len(pamiec) < 10):
+            pamiec.append('ln(' + tekst_pierwotny + ')' + ' = ' + str(wynik))
+        else:
+            pamiec.pop(0)
+            pamiec.append('ln(' + tekst_pierwotny + ')' + ' = ' + str(wynik))
+        # -------------------
+
+    return f
+
 #Funkcja pamieci -----------------------------
 def funkcjaPamieci():
 
@@ -431,20 +463,32 @@ def funkcjaPamieci():
     ekrany_pamieci = [tk.Label(okno_pamieci, bg='#C0CBCB', width=50, anchor='w', borderwidth=2) for i in range(10)]
     for i in range(len(ekrany_pamieci)):
         ekrany_pamieci[i].grid(row=i, columnspan=4, ipady=15, ipadx=1)
-    kosz = tk.Button(okno_pamieci, text="\U0001F5D1", borderwidth=0, bg='light gray',
-                               command=czyszczeniePamieci(ekrany_pamieci))
-    kosz.grid(columnspan=4, ipady=5, ipadx=160)
+    
+
+    przyciski_do_wczytywania = [tk.Button(okno_pamieci, text='\u2B05', borderwidth=0, bg='light gray', ) for i in range(10)]
+
 
     for i in range(len(pamiec)):
         ekrany_pamieci[len(pamiec) - i - 1]['text'] = pamiec[i]
+        przyciski_do_wczytywania[len(pamiec) - i - 1].grid(row=(len(pamiec) - i - 1), column=2, ipady=5, ipadx=5)
+        przyciski_do_wczytywania[len(pamiec) - i - 1].configure(command=przyciskKlik(pole_na_dane, ekrany_pamieci[len(pamiec) - i - 1]['text']))
+
     if len(pamiec) == 0:
         ekrany_pamieci[0]['text'] = "PAMIĘĆ JEST PUSTA !"
 
-def czyszczeniePamieci(ekrany_pamieci):
+
+    kosz = tk.Button(okno_pamieci, text="\U0001F5D1", borderwidth=0, bg='light gray',
+                               command=czyszczeniePamieci(ekrany_pamieci, przyciski_do_wczytywania))
+    kosz.grid(columnspan=4, ipady=5, ipadx=160)
+
+
+
+def czyszczeniePamieci(ekrany_pamieci, przyciski_do_wczytywania):
     def f():
         pamiec.clear()
         for i in range(10):
             ekrany_pamieci[i]['text'] = ""
+            przyciski_do_wczytywania[i].destroy()
     return f
 #---------------------------------------------
 
@@ -504,6 +548,10 @@ def tworzeniePrzyciskow(okno, ekran, info):
     znak_arccos = tk.Button(okno, text='arccos', borderwidth=0, bg='light gray',
                             command=obliczArccos(pole_na_dane, ekran))
     znak_arccos.grid(row=len(ekran) + 7, column=4, ipady=5, ipadx=20)
+
+    znak_ln = tk.Button(okno, text='ln', borderwidth=0, bg='light gray',
+                            command=obliczLn(pole_na_dane, ekran))
+    znak_ln.grid(row=len(ekran) + 7, column=5, ipady=5, ipadx=20)
 
     return przyciski
 
