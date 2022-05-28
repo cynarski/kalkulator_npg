@@ -1,6 +1,7 @@
 Podział zadań:
 Mateusz Cierpik:
-- liczby zespolone
+- liczby zespolone (moduł, argument)
+- wczytanie poprzedniego działania, wczytanie jednego z ostatnich 10 działań
 
 Michał Cynarski:
 - dodatkowe funkcje - funkcje trygonometryczne, logarytmy 
