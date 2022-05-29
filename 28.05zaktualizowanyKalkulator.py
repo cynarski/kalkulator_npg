@@ -1,6 +1,7 @@
 import tkinter as tk
 import math
 from tkinter.constants import GROOVE
+import tkinter.font as tkFont
 
 symbole = ['7', '8', '9', '/', '\u21BA', 'C', '4', '5', '6', '*', 'e', '', '1', '2', '3', '-', '^', '', '0', '.', 'j',
            '+', 'π']
@@ -476,8 +477,8 @@ def funkcjaPamieci():
     if len(pamiec) == 0:
         ekrany_pamieci[0]['text'] = "PAMIĘĆ JEST PUSTA !"
 
-
-    kosz = tk.Button(okno_pamieci, text="\U0001F5D1", borderwidth=0, bg='light gray',
+    custom = tkFont.Font(size=10)
+    kosz = tk.Button(okno_pamieci, text="\U0001F5D1", font=custom, borderwidth=0, bg='light gray',
                                command=czyszczeniePamieci(ekrany_pamieci, przyciski_do_wczytywania))
     kosz.grid(columnspan=4, ipady=5, ipadx=160)
 
@@ -486,7 +487,9 @@ def funkcjaPamieci():
 def czyszczeniePamieci(ekrany_pamieci, przyciski_do_wczytywania):
     def f():
         pamiec.clear()
-        for i in range(10):
+        ekrany_pamieci[0]['text'] = "PAMIĘĆ JEST PUSTA !"
+        przyciski_do_wczytywania[0].destroy()
+        for i in range(1,10):
             ekrany_pamieci[i]['text'] = ""
             przyciski_do_wczytywania[i].destroy()
     return f
